@@ -1,0 +1,421 @@
+
+/* Configuración general */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+    color: #102653;
+    background-color: #f4f6f8;
+    min-height: 100vh;
+}
+
+/* Título principal */
+h1 {
+    text-align: center;
+    font-size: 42px;
+    color: #102653;
+    margin: 20px 0 12px;
+}
+
+/* Título del catálogo */
+h2 {
+    text-align: center;
+    color: #2463eb;
+    font-size: 30px;
+    margin: 15px 0 30px;
+}
+
+/* Tarjeta de producto */
+article {
+    max-width: 650px;
+    margin: 25px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(37, 99, 235, 0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Efecto al pasar el ratón */
+article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(37, 99, 235, 0.18);
+}
+
+/* Nombre de la zapatilla */
+article h3 {
+    margin-top: 0;
+    font-size: 27px;
+    color: #2463eb;
+}
+
+/* Información del producto */
+article p {
+    color: #475569;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+/* Precio destacado */
+article p:nth-of-type(2) {
+    color: #e74772;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+/* Separador */
+hr {
+    display: none;
+}
+
+/* Adaptación a móviles */
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    h2 {
+        font-size: 25px;
+    }
+
+    article {
+        padding: 22px;
+    }
+}
+/* Imagen de cada zapatilla */
+.imagen-producto {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    height: 260px;
+    object-fit: contain;
+    margin: 0 auto 20px;
+    border-radius: 16px;
+}
+
+/* Tarjeta de producto en dos columnas */
+.tarjeta-producto {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 30px;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(37, 99, 235, 0.12);
+}
+
+/* Zona de la fotografía */
+.contenedor-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    background: #f0f7ff;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+/* Imagen de la zapatilla */
+.imagen-producto {
+    display: block;
+    width: 100%;
+    max-width: 380px;
+    height: 300px;
+    object-fit: contain;
+}
+
+/* Información del producto */
+.informacion-producto {
+    min-width: 0;
+}
+
+.informacion-producto h3 {
+    margin: 15px 0;
+    color: #2463eb;
+    font-size: 28px;
+}
+
+/* Etiqueta NUEVO */
+.etiqueta-producto {
+    display: inline-block;
+    padding: 7px 13px;
+    background: #ffe0e9;
+    color: #d63368;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Precio */
+.precio-producto {
+    color: #e74772;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+/* Adaptación a móviles */
+@media (max-width: 650px) {
+    .tarjeta-producto {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .imagen-producto {
+        height: 240px;
+    }
+
+    .informacion-producto h3 {
+        font-size: 24px;
+    }
+}
+
+/* Cabecera principal */
+.cabecera {
+    max-width: 1200px;
+    margin: 0 auto 35px;
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.10);
+}
+
+/* Logo de la tienda */
+.logo {
+    color: #102653;
+    font-size: 24px;
+    font-weight: 900;
+    text-decoration: none;
+    letter-spacing: -1px;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #e74772;
+}
+
+/* Menú de navegación */
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.menu a {
+    color: #334155;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.menu a:hover {
+    color: #2463eb;
+}
+
+/* Enlace del carrito */
+.menu .enlace-carrito {
+    background: #2463eb;
+    color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 14px;
+}
+
+.menu .enlace-carrito:hover {
+    background: #1748bd;
+    color: #ffffff;
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 700px) {
+    .cabecera {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .menu {
+        gap: 16px;
+    }
+
+    .menu a {
+        font-size: 14px;
+    }
+}
+
+/* Sección de bienvenida */
+.bienvenida {
+    max-width: 1200px;
+    margin: 0 auto 45px;
+    padding: 45px 35px;
+    text-align: center;
+}
+
+.contenido-bienvenida {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.subtitulo-bienvenida {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 8px 15px;
+    background: #ffe0e9;
+    color: #d63368;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.bienvenida h1 {
+    margin: 10px 0 18px;
+    color: #102653;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.15;
+}
+
+.bienvenida p {
+    max-width: 650px;
+    margin: 0 auto 28px;
+    color: #64748b;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.boton-catalogo {
+    display: inline-block;
+    padding: 15px 25px;
+    background: #2463eb;
+    color: #ffffff;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.boton-catalogo:hover {
+    background: #1748bd;
+    transform: translateY(-2px);
+}
+
+.boton-catalogo:link,
+.boton-catalogo:visited,
+.boton-catalogo:hover,
+.boton-catalogo:focus {
+    color: #ffffff;
+}
+/* Página de registro */
+.formulario-cuenta {
+    max-width: 520px;
+    margin: 50px auto;
+    padding: 35px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(37, 99, 235, 0.12);
+}
+
+.formulario-cuenta h1 {
+    margin-top: 0;
+    color: #102653;
+    font-size: 30px;
+    text-align: center;
+}
+
+.formulario-cuenta > p {
+    color: #64748b;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.formulario-cuenta form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.formulario-cuenta label {
+    margin-top: 8px;
+    color: #334155;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.formulario-cuenta input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #dbe4f0;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.formulario-cuenta input:focus {
+    border-color: #2463eb;
+    box-shadow: 0 0 0 3px rgba(36, 99, 235, 0.12);
+}
+
+.formulario-cuenta button {
+    width: 100%;
+    margin-top: 18px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.mensaje-error {
+    padding: 12px;
+    background: #fff0f3;
+    color: #bd2451 !important;
+    border-radius: 10px;
+    text-align: left !important;
+}
+
+.mensaje-exito {
+    padding: 14px;
+    background: #e8f8ef;
+    color: #187744 !important;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.formulario-cuenta > p a {
+    color: #2463eb;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.formulario-cuenta > p a:hover {
+    color: #e74772;
+}
+
+@media (max-width: 600px) {
+    .formulario-cuenta {
+        margin: 20px auto;
+        padding: 24px;
+    }
+
+    .formulario-cuenta h1 {
+        font-size: 25px;
+    }
+}
