@@ -43,11 +43,15 @@ if (
 
         <p>Desde aquí podrás gestionar la tienda.</p>
 
-        <h2>Gestión de usuarios</h2>
-        <p>Crear, editar y eliminar cuentas de clientes y administradores.</p>
+        <h2>
+    <a href="usuarios.php">Gestión de usuarios</a>
+</h2>
+<p>Crear, editar y eliminar cuentas de clientes y administradores.</p>
 
-        <h2>Gestión de productos</h2>
-        <p>Crear, editar y eliminar productos del catálogo.</p>
+        <h2>
+    <a href="productos.php">Gestión de productos</a>
+</h2>
+<p>Crear, editar y eliminar productos del catálogo.</p>
 
         <p>
             <a href="../index.php" class="boton-catalogo">

@@ -1,17 +1,7 @@
 
 <?php
-// Iniciar la sesión del usuario.
+// Iniciar o recuperar la sesión del usuario.
 session_start();
-// Conectar con la base de datos.
-require_once __DIR__ . '/config/conexion.php';
-
-// Preparar las variables del inicio de sesión.
-$errores = [];
-$email = '';
-
-?>
-
-<?php
 
 // Conectar con la base de datos.
 require_once __DIR__ . '/config/conexion.php';
@@ -27,12 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    // Comprobar que se han introducido los datos.
+    // Validar los datos.
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errores[] = 'Introduce un correo electrónico válido.';
     }
 
-    
     if ($password === '') {
         $errores[] = 'La contraseña es obligatoria.';
     }
@@ -45,62 +34,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              WHERE email = ?'
         );
 
-        $consulta->bind_param('s', $email);
-        $consulta->execute();
-
-        $resultado = $consulta->get_result();
-        $usuario = $resultado->fetch_assoc();
-
-        $consulta->close();
-
-        // Comprobar que el usuario existe y que la contraseña es correcta.
-        if (!$usuario || !password_verify($password, $usuario['password'])) {
-            $errores[] = 'El correo o la contraseña son incorrectos.';
+        if (!$consulta) {
+            $errores[] = 'No se ha podido realizar la consulta.';
         } else {
-            // Regenerar el identificador de sesión por seguridad.
-            session_regenerate_id(true);
+            $consulta->bind_param('s', $email);
+            $consulta->execute();
 
-            // Guardar los datos necesarios del usuario.
-            $_SESSION['usuario_id'] = $usuario['id'];
-            $_SESSION['usuario_nombre'] = $usuario['nombre'];
-            $_SESSION['usuario_email'] = $usuario['email'];
-            $_SESSION['usuario_rol'] = $usuario['rol'];
+            $resultado = $consulta->get_result();
+            $usuario = $resultado->fetch_assoc();
 
-            // Redirigir según el tipo de usuario.
-            if ($usuario['rol'] === 'admin') {
-                header('Location: admin/index.php');
-                exit;
+            $consulta->close();
+
+            // Comprobar usuario y contraseña.
+            if (
+                !$usuario ||
+                !password_verify($password, $usuario['password'])
+            ) {
+                $errores[] = 'El correo o la contraseña son incorrectos.';
             } else {
-                header('Location: index.php');
-                exit;
+                // Renovar el identificador de sesión.
+                session_regenerate_id(true);
+
+                // Guardar los datos del usuario.
+                $_SESSION['usuario_id'] = $usuario['id'];
+                $_SESSION['usuario_nombre'] = $usuario['nombre'];
+                $_SESSION['usuario_email'] = $usuario['email'];
+                $_SESSION['usuario_rol'] = $usuario['rol'];
+
+                // Redirigir según el rol.
+                if ($usuario['rol'] === 'admin') {
+                    header('Location: admin/index.php');
+                    exit;
+                } else {
+                    header('Location: index.php');
+                    exit;
+                }
             }
         }
     }
-
-            // Comprobar que la contraseña es correcta.
-        elseif (!password_verify($password, $usuario['password'])) {
-            $errores[] = 'El correo o la contraseña son incorrectos.';
-        }
-                else {
-            // Regenerar el identificador de sesión por seguridad.
-            session_regenerate_id(true);
-
-            // Guardar los datos necesarios del usuario.
-            $_SESSION['usuario_id'] = $usuario['id'];
-            $_SESSION['usuario_nombre'] = $usuario['nombre'];
-            $_SESSION['usuario_email'] = $usuario['email'];
-            $_SESSION['usuario_rol'] = $usuario['rol'];
-
-            // Redirigir según el tipo de usuario.
-            if ($usuario['rol'] === 'admin') {
-                header('Location: admin/index.php');
-                exit;
-            } else {
-                header('Location: index.php');
-                exit;
-            }
-        }
-    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -119,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <?php foreach ($errores as $error): ?>
             <p class="mensaje-error">
-                <?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?>
+                <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
             </p>
         <?php endforeach; ?>
 
@@ -129,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 type="email"
                 id="email"
                 name="email"
-                value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>"
+                value="<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>"
                 required
             >
 
